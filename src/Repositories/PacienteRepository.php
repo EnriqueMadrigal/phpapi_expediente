@@ -208,7 +208,7 @@ class PacienteRepository extends BaseRepository
         $paciente->setApodo($row['apodo']);
         $paciente->setCalle($row['calle']);
         $paciente->setEstado((int)$row['estado']);
-        $paciente->setMunicipio((int)$row['municipio']);
+        $paciente->setMunicipio((string)$row['municipio']);
         $paciente->setCp((int)$row['cp']);
         $paciente->setTelefonoCasa($row['telefonoCasa']);
         $paciente->setTelefonoCelular($row['telefonoCelular']);

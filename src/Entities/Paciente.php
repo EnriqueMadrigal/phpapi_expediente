@@ -16,7 +16,7 @@ class Paciente
     public ?string $apodo = null;
     public ?string $calle = null;
     public int $estado = 14;
-    public int $municipio = 73;
+    public ?string $municipio = null;
     public int $cp = 0;
     public ?string $telefonoCasa = null;
     public ?string $telefonoCelular = null;
@@ -52,7 +52,7 @@ class Paciente
     public function getApodo(): ?string { return $this->apodo; }
     public function getCalle(): ?string { return $this->calle; }
     public function getEstado(): int { return $this->estado; }
-    public function getMunicipio(): int { return $this->municipio; }
+    public function getMunicipio(): ?string { return $this->municipio; }
     public function getCp(): int { return $this->cp; }
     public function getTelefonoCasa(): ?string { return $this->telefonoCasa; }
     public function getTelefonoCelular(): ?string { return $this->telefonoCelular; }
@@ -88,7 +88,7 @@ class Paciente
     public function setApodo(?string $apodo): void { $this->apodo = $apodo; }
     public function setCalle(?string $calle): void { $this->calle = $calle; }
     public function setEstado(int $estado): void { $this->estado = $estado; }
-    public function setMunicipio(int $municipio): void { $this->municipio = $municipio; }
+    public function setMunicipio(string $municipio): void { $this->municipio = $municipio; }
     public function setCp(int $cp): void { $this->cp = $cp; }
     public function setTelefonoCasa(?string $telefonoCasa): void { $this->telefonoCasa = $telefonoCasa; }
     public function setTelefonoCelular(?string $telefonoCelular): void { $this->telefonoCelular = $telefonoCelular; }
@@ -162,7 +162,7 @@ public static function fromArray(array $row): self
         if (array_key_exists('apodo', $row)) $u->setApodo((string)$row['apodo']);
         if (array_key_exists('calle', $row)) $u->setCalle((string)$row['calle']);
         if (array_key_exists('estado', $row)) $u->setEstado((int)$row['estado']);
-        if (array_key_exists('municipio', $row)) $u->setMunicipio((int)$row['municipio']);
+        if (array_key_exists('municipio', $row)) $u->setMunicipio((string)$row['municipio']);
         if (array_key_exists('cp', $row)) $u->setCp((int)$row['cp']);
         if (array_key_exists('telefonoCelular', $row)) $u->setTelefonoCelular((string)$row['telefonoCelular']);
         if (array_key_exists('telefonoCasa', $row)) $u->setTelefonoCasa((string)$row['telefonoCasa']);
