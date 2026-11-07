@@ -66,7 +66,7 @@ class ComponentsTextRepository extends BaseRepository
     // Finder by project
     public function findByProject(int $idProject): array
     {
-        $sql = "SELECT valueId, textValue 
+        $sql = "SELECT id, valueId, textValue 
                 FROM {$this->table}
                 WHERE idProject = :idProject
                 ORDER BY orderId ASC";
@@ -78,6 +78,7 @@ class ComponentsTextRepository extends BaseRepository
         while ($row = $stmt->fetch()) {
            
             $newClass = new stdClass();
+            $newClass->id = (int)$row['id'];
             $newClass->valueId = (int)$row['valueId'];
             $newClass->textValue = (string)$row['textValue'];
             $out[] = $newClass;
