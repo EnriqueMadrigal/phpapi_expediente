@@ -12,6 +12,7 @@ use App\Controllers\AuthController;
 use App\Controllers\UserController;
 use App\Controllers\PacienteController;
 use App\Controllers\ComponentsTextController;
+use App\Controllers\TraumatismoController;
 //use App\Entities\Paciente;
 
 
@@ -20,11 +21,13 @@ use App\Services\UserService;
 use App\Services\AuthService;
 use App\Services\PacienteService;
 use App\Services\ComponentsTextService;
+use App\Services\TraumatismoService;
 
 
 use App\Repositories\UserRepository;
 use App\Repositories\PacienteRepository;
 use App\Repositories\ComponentsTextRepository;
+use App\Repositories\TraumatismoRepository;
 
 
 
@@ -44,14 +47,14 @@ $router = new Router();
 $userRepository = new UserRepository();
 $pacienteRepository = new PacienteRepository();
 $componentsTextRepository = new ComponentsTextRepository();
-
+$traumatismoRepository = new TraumatismoRepository();
 
 $loginController = new LoginController(new UserService($userRepository));
 $authController = new AuthController(new AuthService($userRepository));
 $userController = new UserController(new UserService($userRepository));
 $pacienteController = new PacienteController(new PacienteService($pacienteRepository));
 $componentsTextController = new ComponentsTextController(new ComponentsTextService($componentsTextRepository));
-
+$traumatismoController = new TraumatismoController(new TraumatismoService($traumatismoRepository));
 
 $authMiddleware = new AuthMiddleware();
 
@@ -78,6 +81,12 @@ $router->get('/api/pacientes/', fn() => $pacienteController->getPacientes(),[Aut
 $router->get('/api/paciente/(\d+)', fn($id) => $pacienteController->getPaciente($id),[AuthMiddleware::class]);
 $router->put('/api/paciente/', fn() => $pacienteController->update(),[AuthMiddleware::class]);
 $router->delete('/api/paciente/(\d+)', fn($id) => $pacienteController->delete($id),[AuthMiddleware::class]);
+
+
+//Traumatismo
+$router->post('/api/traumatismo/', fn() => $traumatismoController->insert(),[AuthMiddleware::class]);
+$router->put('/api/traumatismo/', fn() => $traumatismoController->update(),[AuthMiddleware::class]);
+$router->get('/api/traumatismo/(\d+)', fn($id) => $traumatismoController->getByPacienteId($id),[AuthMiddleware::class]);
 
 //ComponentsText
 $router->get('/api/componentsText/(\d+)', fn($id) => $componentsTextController->getByIdProject($id),[AuthMiddleware::class]);
