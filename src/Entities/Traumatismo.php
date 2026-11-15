@@ -12,7 +12,7 @@ class Traumatismo implements JsonSerializable
     private int $id_trauma;
     private ?string $trauma;
     private ?string $zona_afectada;
-    private ?\DateTimeInterface $fecha = null;
+    private string $fecha;
     private int $id_tratamiento;
     private ?string $tratamiento;
     private bool $secuelas;
@@ -29,7 +29,7 @@ class Traumatismo implements JsonSerializable
         int $id_trauma = 0,
         ?string $trauma = null,
         ?string $zona_afectada = null,
-        ?string $fecha = '',
+        string $fecha = '',
         int $id_tratamiento = 0,
         ?string $tratamiento = null,
         bool $secuelas = false,
@@ -45,7 +45,7 @@ class Traumatismo implements JsonSerializable
         $this->id_trauma = $id_trauma;
         $this->trauma = $trauma;
         $this->zona_afectada = $zona_afectada;
-        $this->fecha = new \DateTimeImmutable('now');;
+        $this->fecha = $fecha;
         $this->id_tratamiento = $id_tratamiento;
         $this->tratamiento = $tratamiento;
         $this->secuelas = $secuelas;
@@ -116,12 +116,12 @@ class Traumatismo implements JsonSerializable
         $this->zona_afectada = $zona_afectada;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): string
     {
         return $this->fecha;
     }
 
-    public function setFecha(?\DateTimeInterface $fecha): void
+    public function setFecha(string $fecha): void
     {
         $this->fecha = $fecha;
     }

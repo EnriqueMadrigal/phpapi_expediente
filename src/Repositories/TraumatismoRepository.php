@@ -78,6 +78,9 @@ class TraumatismoRepository extends BaseRepository
       //      $entities[] = $this->mapToEntity($row);
        // }
        $row = $stmt->fetch();
+       if ($row === false) {
+            return [];
+        }
         return $this->mapRowToEntity($row);
     }
 
@@ -148,7 +151,7 @@ class TraumatismoRepository extends BaseRepository
             'id_trauma' => $traumatismo->getIdTrauma(),
             'trauma' => $traumatismo->getTrauma(),
             'zona_afectada' => $traumatismo->getZonaAfectada(),
-            'fecha' => $traumatismo->getFecha()?->format('Y-m-d'),
+            'fecha' => $traumatismo->getFecha(),
             'id_tratamiento' => $traumatismo->getIdTratamiento(),
             'tratamiento' => $traumatismo->getTratamiento(),
             'secuelas' => $traumatismo->getSecuelas() ? 1 : 0,
@@ -196,7 +199,7 @@ class TraumatismoRepository extends BaseRepository
             'id_trauma' => $traumatismo->getIdTrauma(),
             'trauma' => $traumatismo->getTrauma(),
             'zona_afectada' => $traumatismo->getZonaAfectada(),
-            'fecha' => $traumatismo->getFecha()->format('Y-m-d'),
+            'fecha' => $traumatismo->getFecha(),
             'id_tratamiento' => $traumatismo->getIdTratamiento(),
             'tratamiento' => $traumatismo->getTratamiento(),
             'secuelas' => $traumatismo->getSecuelas() ? 1 : 0,
